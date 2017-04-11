@@ -1,0 +1,33 @@
+
+    <ul class="nav nav-pills nav-pills-primary" >
+        <li class="active" ><a href="blog-posts.html#pill5" data-toggle="tab" (click)="wedding('')">All</a></li>
+        <li><a href="blog-posts.html#pill2" data-toggle="tab" (click)="wedding('W')">Wedding</a></li>
+        <li><a href="blog-posts.html#pill3" data-toggle="tab" (click)="wedding('PW')">Pre-wedding</a></li>
+        <li><a href="blog-posts.html#pill4" data-toggle="tab" (click)="wedding('F')">Family</a></li>
+        <li><a href="blog-posts.html#pill5" data-toggle="tab" (click)="wedding('PO')">Portrait</a></li>
+        <li><a href="blog-posts.html#pill5" data-toggle="tab" (click)="wedding('PE')">Personal</a></li>
+    </ul>
+    <div #galleryContainer class="galleryContainer" style="padding-top: 15px; min-height: 20px">
+    <div class="innerGalleryContainer container">
+        <div  *ngFor='let imgrow of gallery; let i = index'
+             class="imagerow" style="min-height: 20%"
+             [style.margin-bottom.px]="calcImageMargin()">
+            <img #imageElement on-mouseover='over()'
+                 *ngFor='let img of imgrow; let j = index'
+                 class="thumbnail"
+                 [style.width.px]="img['width']"
+                 [style.height.px]="img['height']"
+                 (click)="openImageViewer(img)"
+                 [src]="img['srcAfterFocus']"
+                 [style.background]="img.dominantColor"
+                 [style.margin-right.px]="calcImageMargin()"/>
+        </div>
+            <div class="text-center">
+                 <button *ngIf="next != null" class="  btn btn-primary" (click)="loadmore(data)">Load more</button>
+            </div>
+    </div>
+</div>
+		
+
+
+<viewer></viewer>

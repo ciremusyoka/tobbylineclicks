@@ -1,0 +1,56 @@
+<div class="page-head" data-parallax="active" ></div>
+
+<div class="main main-raised" style="background-color: #E5E5E5" style="min-height: 70%">
+    <div class="section" style="padding-top: 15px">
+		<div class="container">
+			<div class="row">
+				
+				<div class="col-md-12" >
+					<div class="row">
+						<div class="col-md-4" *ngFor="let bl of blog " bl="selectedblog">
+							<div class="card card-blog" >
+								<div class="card-image">
+									<a [routerLink]="['/blog',bl.id]" >
+										<img class="img img-raised" src="{{bl.card_image}}" />
+									</a>
+								</div>
+
+								<div class="content">
+									<h6 class="category text-success">{{bl.category}}</h6>
+									<h4 class="card-title" style="height: 60px">
+										<a [routerLink]="['/blog',bl.id]">{{bl.title}}</a>
+									</h4>
+									<p class="card-description" >
+										<span [innerHTML]="bl.description"></span>
+                                        <a  [routerLink]="['/blog',bl.id]" >... Read More </a>
+									</p>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+
+				</div>
+
+			</div>
+			<div class="text-center" *ngIf="next!=null">
+				<button class="btn btn-info" (click)="loadmore(data)">
+						Load More
+				</button>
+			</div>
+		</div>
+	</div>
+
+</div>
+<nav id="cd-vertical-nav" *ngIf="hideheader">
+	<ul>
+		<li>
+			<a >
+				<span style="color: red; font-size:20px"><=</span>
+				<button class="cd-label" (click)="back()">Back</button>
+			</a>
+		</li>
+	</ul>
+</nav>
+<app-footer></app-footer>

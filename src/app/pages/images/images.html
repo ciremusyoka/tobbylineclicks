@@ -1,0 +1,20 @@
+
+<div  class="page-head" data-parallax="active" ></div>
+
+<div class="main main-raised" style="min-height: 70%">
+	<div class="container">
+		<div class="about-services features-2" style="padding-top: 15px">
+			<div *ngIf="!slide" class="text-center" style="padding-top: 15px; ">
+				<div >Image size
+					<md-slider [min]="min" [max]="max" [step]="step" [(ngModel)]="flexImageSize"></md-slider>
+					<md-input-container >
+						<input mdInput [(ngModel)]="flexImageSize" type="number" min="0" max="50">
+					</md-input-container>
+				</div>
+			</div>
+			<gallery (viewerChange)="onViewChange($event)" [flexBorderSize]="flexBorderSize" [flexImageSize]="flexImageSize"></gallery>
+		</div>
+	</div>
+</div> 
+
+<app-footer></app-footer>

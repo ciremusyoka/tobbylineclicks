@@ -1,0 +1,102 @@
+<div class="page-head" data-parallax="active" *ngIf="hideheader"></div>
+
+<div class="main main-raised" *ngIf="hideheader" style="min-height: 70%" style="background-color: white">
+		<div class="container" *ngIf='bl'>
+            <div class="section section-text" style="padding-top: 15px">
+                <div class="row" >
+    				<div class="col-md-8 col-md-offset-2" >
+        				<h3 class="title">{{bl.title}}</h3>
+    				<div [innerHTML]="bl.top_description"></div>
+					</div>
+					<div class="section col-md-10 col-md-offset-1">
+						<div class="col-md-4">
+							<a  ><img (click)="onViewChange()" (click)="img_one()" class="img-rounded img-responsive img-raised" alt="Raised Image" src="{{bl.image_1}}"></a>
+						</div>
+						<div class="col-md-4">
+							<img  (click)="onViewChange()" (click)="img_two()" class="img-rounded img-responsive img-raised" alt="Raised Image" src="{{bl.image_2}}">
+						</div>
+						<div class="col-md-4">
+							<img (click)="onViewChange()" (click)="img_three()" class="img-rounded img-responsive img-raised" alt="Raised Image" src="{{bl.image_3}}">
+						</div>
+					</div>
+
+					<div class="col-md-8 col-md-offset-2">
+						<div [innerHTML]="bl.bottom_description"></div>
+						
+    				</div> 
+				</div>
+				
+			</div>
+			
+        </div>
+    </div>
+
+	<div class="text-center" *ngIf="!hideheader" style="background-color: rgba(0, 0, 0, 0.95);">
+		<div *ngIf='bl' >
+				<button class="pull-right btn btn-default" (click)="onViewChange()">x</button>
+				<img *ngIf='im==1' style="max-height: 100vh; max-width: 100vw" src="{{bl.image_one}}">
+				<img *ngIf='im==2' style="max-height: 100vh; max-width: 100vw" src="{{bl.image_two}}">
+				<img *ngIf='im==3' style="max-height: 100vh; max-width: 100vw" src="{{bl.image_three}}">
+			
+		</div>
+	</div>
+
+    <div class="section" *ngIf="hideheader" style="background-color: white">
+		<div class="container">
+			<div class="row">
+
+
+				<div class="col-md-12">
+					<h2 class="title text-center"> Related Articles</h2>
+					<div class="row">
+						<div *ngIf="blog == ''" class="text-center" style="color: red">
+							<p> No related Articles</p>
+						</div>
+						<div class="col-md-4" *ngFor="let blg of blog" bl="selectedblog">
+							<div class="card card-blog" >
+								<div class="card-image">
+									<a [routerLink]="['/blog',blg.id]">
+										<img class="img img-raised" src="{{blg.card_image}}" />
+									</a>
+								</div>
+
+								<div class="content">
+									<h6 class="category text-success">{{blg.category}}</h6>
+									<h4 class="card-title" style="height: 60px">
+										<a [routerLink]="['/blog',blg.id]">{{blg.title}}</a>
+									</h4>
+									<p class="card-description">
+										<span [innerHTML]="blg.description"></span>
+                                        <a  [routerLink]="['/blog',blg.id]" >... Read More </a>
+									</p>
+								</div>
+							</div>
+						</div>
+						
+
+					</div>
+
+				</div>
+
+
+			</div>
+			<div class="text-center" *ngIf='bl'>
+				<button class="btn btn-info" [routerLink]="['/blog/category',bl.category]">
+						Load More
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<nav id="cd-vertical-nav" *ngIf="hideheader">
+	<ul>
+		<li>
+			<a >
+				<span style="color: red; font-size:20px"><=</span>
+				<button class="cd-label" (click)="back()">Back</button>
+			</a>
+		</li>
+	</ul>
+</nav>
+
+<app-footer></app-footer>

@@ -1,0 +1,83 @@
+<div class="page-head" data-parallax="active" ></div>
+
+<div class="main main-raised" style="padding-top: 5px">
+		<div class="contact-content">
+    		<div class="container">
+				<div class="info-title text-center" style="padding-top: 15px">
+					<p>You can contact us with anything related to our Products. We'll get in touch with you as soon as possible.<br><br>
+					</p>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<form  >
+							<div class="form-group label-floating">
+								<label class="control-label" style="color: black">Your name</label>
+								<input style="color: black" required type="text"  class="form-control" name="name" [(ngModel)]="sms.name" #name="ngModel">
+							</div>
+							<div *ngIf="name.errors && (name.dirty || name.touched)">
+								<p style="color: red" [hidden]="!name.errors.required">
+								Name is required
+								</p>
+							</div>
+							<div class="form-group label-floating">
+								<label class="control-label" style="color: black">Email address</label>
+								<input style="color: black" type="email" name="email" [(ngModel)]="sms.email" #email="ngModel" required class="form-control"/>
+							</div>
+							<div *ngIf="email.errors && (email.dirty || email.touched)">
+								<p style="color: red" [hidden]="!email.errors.required">
+								email adresss is required
+								</p>
+							</div>
+							<div class="form-group label-floating">
+								<label class="control-label" style="color: black">Phone</label>
+								<input style="color: black" type="text" name="phone" [(ngModel)]="sms.phone" #phone="ngModel" required class="form-control"/>
+							</div>
+							<div *ngIf="phone.errors && (phone.dirty || phone.touched)">
+								<p style="color: red" [hidden]="!phone.errors.required">
+								phone number is required
+								</p>
+							</div>
+							<div class="form-group label-floating">
+								<label class="control-label" style="color: black">Your message</label>
+								<textarea style="color: black" name="message" [(ngModel)]="sms.message" #message="ngModel" required class="form-control" id="message" rows="6"></textarea>
+							</div>
+							<div *ngIf="message.errors && (message.dirty || message.touched)">
+								<p style="color: red" [hidden]="!message.errors.required">
+								you must type a message
+								</p>
+							</div>
+							<div class="submit text-center">
+								<button class="btn waves-effect waves-light"  name="action" style="color: blue" (click)="sendsms(sms)" >Submit
+                                    <i class="material-icons right">send</i>
+                                </button>
+							</div>
+						</form>
+					</div>
+                	<div class="col-md-4 col-md-offset-2">
+                        <div class="info info-horizontal">
+    						<div class="icon icon-primary">
+    							<i class="material-icons" style="color: slategray">phone</i>
+    						</div>
+    						<div class="description" >
+    							<h4 class="info-title">Call us</h4>
+    							<p style="color: black"> Tobias Musyoka<br>
+                                    +254 700 336 620<br>
+                                    +254 729 897 305
+    							</p>
+    						</div>
+    		        	</div>
+    		        	<div class="info info-horizontal" style="padding-top: 15px">
+    						<div class="icon icon-primary">
+    							<i class="material-icons" style="color: slategray">email</i>
+    						</div>
+    						<div class="description">
+    							<h4 class="info-title">Email us</h4>
+    							<p style="color: black"> tobbylineclicks@gmail.com</p>
+    						</div>
+    		        	</div>
+				    </div>
+               </div>
+            </div>
+		</div>
+    </div>
+	<app-footer></app-footer>

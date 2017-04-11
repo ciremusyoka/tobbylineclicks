@@ -1,0 +1,64 @@
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+
+/* Image gallery */
+
+.innerGalleryContainer {
+    position: relative;
+}
+
+.galleryContainer {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.galleryContainer img:last-child {
+    /* important to overwrite inline css and prevent chrome flickering bug */
+    margin-right: -1px !important;
+}
+
+.galleryContainer img:hover {
+    -webkit-filter: brightness(50%);
+    filter: brightness(50%);
+    transition: all ease-out 0.2s;
+    cursor: pointer;
+}
+
+.imagerow {
+    margin-right: 1px;
+    overflow: hidden;
+    display: flex;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.asyncLoadingContainer {
+    position: absolute;
+    background-color: transparent;
+    height: 0px;
+    width: 0px;
+    bottom: 120px;
+}
