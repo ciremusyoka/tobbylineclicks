@@ -15,6 +15,7 @@ export class BlogcategoryComponent implements OnInit {
     blog: any[];
     data: any[];
     next: '';
+    loader: boolean = true;
     hideheader: boolean = true;
     constructor(private aboutserv:AboutService,
                 private route: ActivatedRoute,
@@ -44,6 +45,7 @@ export class BlogcategoryComponent implements OnInit {
                 this.next = blog.next;
                 this.data = blog;
                 this.blog = blog.results;
+                this.loader = false;
             });
 
         this.router.events.subscribe((evt) => {

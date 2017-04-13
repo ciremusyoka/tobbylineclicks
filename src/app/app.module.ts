@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule} from './routers';
@@ -46,10 +45,9 @@ import { FooterComponent } from './pages/footer/footer.component';
     HttpModule,
     AppRoutingModule,
     MaterialModule,
-    InfiniteScrollModule,
     
   ],
-  providers: [AboutService, ImageService, BlogService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [AboutService, ImageService, BlogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

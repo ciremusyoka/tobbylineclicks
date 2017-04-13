@@ -13,6 +13,7 @@ import {Subscription} from 'rxjs/Subscription';
     styleUrls: ['./gallery.component.css'],
 })
 export class GalleryComponent implements OnInit, OnDestroy, OnChanges {
+    loader: boolean =true;
     private imageDataFilePath: string = 'assets/img/gallery/'
     private dataFileName: string = 'data.json'
     private images: any[] = []
@@ -21,12 +22,14 @@ export class GalleryComponent implements OnInit, OnDestroy, OnChanges {
     private results: any[] = []
     private data: any[] = []
     private name: '';
+    private er: string = '';
     private next: '';
     private page: {};
     private minimalQualityCategory = 'preview_xxs'
     private viewerSubscription: Subscription;
     public headers = new Headers({'Content-Type': 'application/json'});
-    private apiURL = 'http://127.0.0.1:8000/api/images';
+    private apiURL = 'https://api.tobbyline.com/api/images';
+    //public apiURL = 'http://localhost:8000/api/images';
 
     @Input('flexBorderSize') providedImageMargin: number = 2
     @Input('flexImageSize') providedImageSize: number = 7
@@ -60,9 +63,6 @@ export class GalleryComponent implements OnInit, OnDestroy, OnChanges {
         this.render()
     }
 
-    over(){
-        console.log("Mouseover called");
-    }
 
     public ngOnDestroy() {
         if (this.viewerSubscription) {
@@ -82,7 +82,6 @@ export class GalleryComponent implements OnInit, OnDestroy, OnChanges {
             } )
             .subscribe(
                 data => {
-                    this.images = [];
                     this.data = data;
                     this.next  = data.next;
                     this.images =  data.results;
@@ -91,7 +90,9 @@ export class GalleryComponent implements OnInit, OnDestroy, OnChanges {
                         image['galleryImageLoaded'] = false
                         image['viewerImageLoaded'] = false
                         image['srcAfterFocus'] = ''
-                    })
+                    });
+                    this.loader = false;
+                    this.er = 'No images to dispay';
                     // twice, single leads to different strange browser behaviour
                     this.render()
                     this.render()
@@ -130,6 +131,8 @@ export class GalleryComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     private wedding(cat) {
+        this.loader = true;
+        this.er = '';
          this.gallery =[];
          let url = `${this.apiURL}?category=`+cat
         this.http.get(url, {headers:this.headers})
@@ -145,7 +148,9 @@ export class GalleryComponent implements OnInit, OnDestroy, OnChanges {
                         image['galleryImageLoaded'] = false
                         image['viewerImageLoaded'] = false
                         image['srcAfterFocus'] = ''
-                    })
+                    });
+                    this.loader = false;
+                    this.er = 'No images to dispay';
                     // twice, single leads to different strange browser behaviour
                     this.render()
                     this.render()

@@ -13,6 +13,7 @@ import 'rxjs/add/operator/switchMap';
 })
 export class BlogdetailsComponent implements OnInit {
     im = '';
+    loader: boolean = true;
     weddings = '';
     public bl: {};
     id = '';
@@ -62,6 +63,7 @@ export class BlogdetailsComponent implements OnInit {
             .switchMap((params: Params) => this.blogserv.getbl(+params['id']))
             .subscribe(bl => {
                 this.bl = bl;
+                this.loader =false
                 this.blog = bl.similar;
             }); 
         

@@ -6,7 +6,8 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class BlogService{
   public headers = new Headers({'Content-Type': 'application/json'});
-  public apiURL = 'http://127.0.0.1:8000/api';
+  public apiURL = 'https://api.tobbyline.com/api';
+  //public apiURL = 'http://localhost:8000/api';
 
   constructor(private http: Http) { }
 
@@ -45,10 +46,26 @@ export class BlogService{
   createsms(sms): Promise<void>{
     var newurl = `${this.apiURL}/messages`;
     return this.http
-    .post(newurl,sms, {headers: this.headers})
-    .toPromise()
-    .then(res => res.json().data=sms)
-    .catch(this.handleError);
+                .post(newurl,sms, {headers: this.headers})
+                .toPromise()
+                .then(res => res.json().data=sms)
+                .catch(this.handleError);
+  }
+
+  getlandingpageimage() {
+    const url = `${this.apiURL}/landing_image`;
+    return this.http.get(url, {headers:this.headers})
+                .toPromise()
+                .then(res => res.json())
+                .catch(this.handleError)
+  }
+
+  getaboutimage(){
+    const url = `${this.apiURL}/about_image`;
+    return this.http.get(url, {headers:this.headers})
+                .toPromise()
+                .then(res => res.json())
+                .catch(this.handleError)
   }
 
   private handleError(error: any) {

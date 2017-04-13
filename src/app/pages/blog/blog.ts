@@ -7,6 +7,7 @@ import { PipePipe } from './pipe.pipe';
     templateUrl: './blog.html',
 })
 export class BlogComponent{
+    loader: boolean = true;
     blog: any[];
     data: any[];
     error: any;
@@ -21,6 +22,7 @@ export class BlogComponent{
                 this.next = blog.next;
                 this.data = blog;
                 this.blog = blog.results;
+                this.loader = false;
             })
             .catch(error => this.error = error);
     }

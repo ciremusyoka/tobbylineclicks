@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AboutService} from '../about/about.service';
+import { BlogService } from '../blog/blogservice';
 
 @Component({
     selector: 'home',
@@ -9,14 +9,23 @@ import {AboutService} from '../about/about.service';
 export class HomeComponent {
     images: string[];
     image: {};
+    img: {};
+    error = '';
 
-
-  constructor () {}
-
-
-  ngOnInit(): void {
-    //this.images = ['assets/img/bg0.jpg', 'assets/img/im.jpg', 'assets/img/im0.jpg' ]
-    //this.image = this.images[Math.floor(Math.random() * this.images.length) ]
-    this.image = 'assets/img/bg0.jpg';
+  constructor (private blogservice: BlogService) {
+    //this.image = 'http://localhost:8000/media/personal/59cc163c-84ef-4627-956e-9bae92a39669.jpg';
   }
-} 
+   getimage() {
+       this.blogservice
+            .getlandingpageimage()
+            .then(images => {
+                this.images = images;
+                this.image = this.images[Math.floor(Math.random() * this.images.length)];
+            })
+            .catch(error => this.error = error);
+
+   }
+   ngOnInit() {
+    this.getimage();
+  }
+}

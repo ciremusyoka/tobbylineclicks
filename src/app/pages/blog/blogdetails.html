@@ -1,9 +1,10 @@
 <div class="page-head" data-parallax="active" *ngIf="hideheader"></div>
 
-<div class="main main-raised" *ngIf="hideheader" style="min-height: 70%" style="background-color: white">
+<div class="main main-raised" *ngIf="hideheader" style="background-color: white;min-height: 500px">
 		<div class="container" *ngIf='bl'>
-            <div class="section section-text" style="padding-top: 15px">
-                <div class="row" >
+			<div *ngIf="loader" class="loader"></div>
+            <div class="section section-text" style="padding-top: 15px;">
+                <div class="row" style="" >
     				<div class="col-md-8 col-md-offset-2" >
         				<h3 class="title">{{bl.title}}</h3>
     				<div [innerHTML]="bl.top_description"></div>

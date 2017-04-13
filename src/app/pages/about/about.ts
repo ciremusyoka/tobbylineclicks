@@ -1,16 +1,31 @@
 import { Component,EventEmitter } from '@angular/core';
+import { BlogService } from '../blog/blogservice';
 @Component({
     selector: 'about',
     templateUrl: './about.html'
 })
 export class AboutComponent {
+   // loader: boolean = true;
    images: string[];
    image = {};
+   error = '';
 
-   constructor(){
-       this.images =['assets/img/abt.jpeg', 'assets/img/abt0.jpeg', 'assets/img/abt1.jpeg', 'assets/img/abt2.jpeg'
-                        , 'assets/img/abt3.jpeg', 'assets/img/abt4.jpeg'];
-       this.image =this.images[Math.floor(Math.random()*this.images.length)];
+   constructor(private blogservice: BlogService) {
    }
+
+   getaboutimage() {
+       this.blogservice
+            .getaboutimage()
+            .then(images => {
+                this.images = images;
+                this.image = this.images[Math.floor(Math.random() * this.images.length)];
+                //this.loader = false;
+            })
+            .catch(error => this.error = error);
+
+   }
+   ngOnInit() {
+    this.getaboutimage();
+  }
 
 }
