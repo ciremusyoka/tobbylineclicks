@@ -1,6 +1,8 @@
+<app-header></app-header>
+
 <div class="page-head" data-parallax="active" *ngIf="hideheader"></div>
 
-<div class="main main-raised" *ngIf="hideheader" style="background-color: white;min-height: 500px">
+<div class="main main-raised" *ngIf="hideheader" style="background-color: white;" [style.min-height.px]="innerHeight">
 		<div class="container" *ngIf='bl'>
 			<div *ngIf="loader" class="loader"></div>
             <div class="section section-text" style="padding-top: 15px;">
@@ -9,7 +11,7 @@
         				<h3 class="title">{{bl.title}}</h3>
     				<div [innerHTML]="bl.top_description"></div>
 					</div>
-					<div class="section col-md-10 col-md-offset-1">
+					<div *ngIf="imagethree != null" class="section col-md-10 col-md-offset-1">
 						<div class="col-md-4">
 							<a  ><img (click)="onViewChange()" (click)="img_one()" class="img-rounded img-responsive img-raised" alt="Raised Image" src="{{bl.image_1}}"></a>
 						</div>

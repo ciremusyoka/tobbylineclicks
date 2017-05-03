@@ -22,6 +22,7 @@ import {Angular2ImageGalleryModule} from 'angular2-image-gallery';
 import { PipePipe } from './pages/blog/pipe.pipe';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { FooterComponent } from './pages/footer/footer.component';
+import { HeaderComponent } from './pages/header/header.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { FooterComponent } from './pages/footer/footer.component';
     PipePipe,
     BlogcategoryComponent,
     FooterComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

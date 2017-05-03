@@ -6,11 +6,12 @@ import { BlogService } from '../blog/blogservice';
 })
 export class AboutComponent {
    // loader: boolean = true;
-   images: string[];
+   images: any[];
    image = {};
    error = '';
-
+   private innerHeight: any;
    constructor(private blogservice: BlogService) {
+       this.innerHeight = (window.screen.height)/1.5 ;
    }
 
    getaboutimage() {
@@ -18,8 +19,9 @@ export class AboutComponent {
             .getaboutimage()
             .then(images => {
                 this.images = images;
-                this.image = this.images[Math.floor(Math.random() * this.images.length)];
-                //this.loader = false;
+                this.images.forEach((obj) => {
+                    this.image = obj
+                });
             })
             .catch(error => this.error = error);
 

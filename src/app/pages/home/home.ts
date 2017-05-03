@@ -7,9 +7,8 @@ import { BlogService } from '../blog/blogservice';
 
 })
 export class HomeComponent {
-    images: string[];
+    images:any[] = [];
     image: {};
-    img: {};
     error = '';
 
   constructor (private blogservice: BlogService) {
@@ -20,7 +19,9 @@ export class HomeComponent {
             .getlandingpageimage()
             .then(images => {
                 this.images = images;
-                this.image = this.images[Math.floor(Math.random() * this.images.length)];
+                this.images.forEach((obj) => {
+                    this.image = obj.landing_img;
+                })
             })
             .catch(error => this.error = error);
 

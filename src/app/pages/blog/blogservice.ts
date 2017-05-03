@@ -6,8 +6,8 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class BlogService{
   public headers = new Headers({'Content-Type': 'application/json'});
-  public apiURL = 'https://api.tobbyline.com/api';
-  //public apiURL = 'http://localhost:8000/api';
+  //public apiURL = 'https://api.tobbyline.com/api';
+  public apiURL = 'http://localhost:8000/api';
 
   constructor(private http: Http) { }
 
@@ -69,7 +69,6 @@ export class BlogService{
   }
 
   private handleError(error: any) {
-    console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
 }

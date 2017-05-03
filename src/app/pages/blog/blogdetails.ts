@@ -19,7 +19,9 @@ export class BlogdetailsComponent implements OnInit {
     id = '';
     blog: any[];
     error: any;
+    imagethree = '';
     hideheader: boolean = true;
+    private innerHeight: any;
     constructor(private aboutserv:AboutService,
                 private route: ActivatedRoute,
                 private location: Location,
@@ -29,7 +31,7 @@ export class BlogdetailsComponent implements OnInit {
         this.aboutserv.imageview.subscribe(resp=>{this.hideheader=resp
          } );
 
-         
+        this.innerHeight = (window.screen.height)*3/4 ; 
     }
 
     onViewChange() {
@@ -62,8 +64,9 @@ export class BlogdetailsComponent implements OnInit {
         this.route.params
             .switchMap((params: Params) => this.blogserv.getbl(+params['id']))
             .subscribe(bl => {
+                this.imagethree = bl.image_3;
                 this.bl = bl;
-                this.loader =false
+                this.loader =false;
                 this.blog = bl.similar;
             }); 
         

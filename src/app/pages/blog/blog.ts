@@ -12,7 +12,10 @@ export class BlogComponent{
     data: any[];
     error: any;
     next: '';
+    private innerHeight: any;
+    er: string = '';
     constructor(private zone: NgZone, private blogservice: BlogService) {
+        this.innerHeight = (window.screen.height)*3/4 ;
     }
 
     getblog(){
@@ -22,6 +25,7 @@ export class BlogComponent{
                 this.next = blog.next;
                 this.data = blog;
                 this.blog = blog.results;
+                this.er = 'No blogs to display';
                 this.loader = false;
             })
             .catch(error => this.error = error);

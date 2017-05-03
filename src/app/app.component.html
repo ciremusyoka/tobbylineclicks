@@ -1,44 +1,7 @@
 <body class="presentation-page">
 <div class="container" style="width: 100%; position: relative;   padding-right: 0px;
-    padding-left: 0px;">
-	<nav *ngIf="!navbar" class="navbar navbar-default navbar-transparent navbar-fixed-top navbar-color-on-scroll" id="sectionsNav">
-		<div class="container">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example">
-            		<span class="sr-only">Toggle navigation</span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-        		</button>
-				<a class="navbar-brand" routerLink="/" >TobbyLineClicks</a>
-			</div>
+    padding-left: 0px;" >
 
-			<div class="collapse navbar-collapse" id="navigation-example">
-				<ul class="nav navbar-nav navbar-right">
-
-					<li >
-	 					<a routerLink="/">Home</a>
-					</li>
-
-					<li>
-						<a routerLink="/gallery">Gallery</a>
-					</li>
-
-					<li>
-						<a routerLink="/blog"> Blog	</a>
-					</li>
-					<li>
-						<a routerLink="/about">About</a>
-					</li>
-
-					<li>
-						<a routerLink="/contacts">	Contacts</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
 
 	<router-outlet ></router-outlet>
 </div>

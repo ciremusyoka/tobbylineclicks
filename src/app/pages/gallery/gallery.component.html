@@ -1,23 +1,23 @@
 
     <ul class="nav nav-pills nav-pills-primary" >
-        <li class="active" ><a href="blog-posts.html#pill5" data-toggle="tab" (click)="wedding('')">All</a></li>
-        <li><a href="blog-posts.html#pill2" data-toggle="tab" (click)="wedding('W')">Wedding</a></li>
-        <li><a href="blog-posts.html#pill3" data-toggle="tab" (click)="wedding('PW')">Pre-wedding</a></li>
-        <li><a href="blog-posts.html#pill4" data-toggle="tab" (click)="wedding('F')">Family</a></li>
+        <li class="active" ><a href="blog-posts.html#pill5" data-toggle="tab" (click)="featured('True')">Featured</a></li>
+        <li><a href="blog-posts.html#pill2" data-toggle="tab" (click)="wedding('')">All</a></li>
         <li><a href="blog-posts.html#pill5" data-toggle="tab" (click)="wedding('PO')">Portrait</a></li>
-        <li><a href="blog-posts.html#pill5" data-toggle="tab" (click)="wedding('PE')">Personal</a></li>
+        <li><a href="blog-posts.html#pill3" data-toggle="tab" (click)="wedding('W')">wedding</a></li>
         <li><a href="blog-posts.html#pill5" data-toggle="tab" (click)="wedding('LS')">Landscape</a></li>
+        <li><a href="blog-posts.html#pill5" data-toggle="tab" (click)="wedding('PE')">Personal</a></li>
     </ul>
-    <div #galleryContainer class="galleryContainer" style="padding-top: 15px; min-height: 350px">
+    <div #galleryContainer class="galleryContainer" style="padding-top: 15px;" >
      <div *ngIf="images==''" class="text-center" style="color: red; top: 50%; left: 50%; position: fixed">{{er}}</div>
      <div *ngIf="loader" class="loader" ></div>   
     <div class="innerGalleryContainer container">
         <div  *ngFor='let imgrow of gallery; let i = index'
-             class="imagerow" style="min-height: 20%"
-             [style.margin-bottom.px]="calcImageMargin()">
+             class="imagerow" 
+             [style.margin-bottom.px]="MyImageMargin()"
+             >
             <img #imageElement on-mouseover='over()' 
                  *ngFor='let img of imgrow; let j = index'
-                 class="thumbnail"
+                 class="gallerythumbnail"
                  [style.width.px]="img['width']"
                  [style.height.px]="img['height']"
                  (click)="openImageViewer(img)"

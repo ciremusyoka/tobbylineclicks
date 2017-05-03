@@ -17,12 +17,13 @@ export class BlogcategoryComponent implements OnInit {
     next: '';
     loader: boolean = true;
     hideheader: boolean = true;
+    private innerHeight: any;
     constructor(private aboutserv:AboutService,
                 private route: ActivatedRoute,
                 private location: Location,
                 private blogserv: BlogService,
                 private router: Router,
-                ) {}
+                ) { this.innerHeight = (window.screen.height)*3/4 ;}
 
     back(): void {
         this.location.back();

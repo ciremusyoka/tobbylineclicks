@@ -11,12 +11,14 @@ export class ImagesComponent{
     min = 0;
     step = 2;
     value = 30;
+    private innerHeight: any;
     private flexBorderSize: number = 0
     private flexImageSize: number = 7
     private galleryName: string = '';
     constructor(private aboutserv:AboutService){
         this.aboutserv.imageview.subscribe(resp=>{this.slide=resp
          })
+          this.innerHeight = (window.screen.height)*3/4 ;
     }
    
 

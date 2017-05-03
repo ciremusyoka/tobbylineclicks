@@ -27,9 +27,10 @@ export class GalleryComponent implements OnInit, OnDestroy, OnChanges {
     private page: {};
     private minimalQualityCategory = 'preview_xxs'
     private viewerSubscription: Subscription;
+    private innerHeight: any;
     public headers = new Headers({'Content-Type': 'application/json'});
-    private apiURL = 'https://api.tobbyline.com/api/images';
-    //public apiURL = 'http://localhost:8000/api/images';
+    //private apiURL = 'https://api.tobbyline.com/api/images';
+    public apiURL = 'http://localhost:8000/api/images';
 
     @Input('flexBorderSize') providedImageMargin: number = 2
     @Input('flexImageSize') providedImageSize: number = 7
@@ -50,7 +51,9 @@ export class GalleryComponent implements OnInit, OnDestroy, OnChanges {
 
 
     constructor(private zone: NgZone, private ImageService: ImageService, private http: Http,
-                private ChangeDetectorRef: ChangeDetectorRef) { }
+                private ChangeDetectorRef: ChangeDetectorRef) { 
+                    this.innerHeight = (window.screen.height)*3/4;
+                }
 
     public ngOnInit() {
         this.fetchDataAndRender()
@@ -76,7 +79,9 @@ export class GalleryComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     private fetchDataAndRender() {
-        this.http.get(this.apiURL, {headers:this.headers})
+        const featured = 'True';
+        const url = `${this.apiURL}?featured=`+featured;
+        this.http.get(url, {headers:this.headers})
             .map((res: Response) =>{
                 return res.json();
             } )
@@ -133,8 +138,8 @@ export class GalleryComponent implements OnInit, OnDestroy, OnChanges {
     private wedding(cat) {
         this.loader = true;
         this.er = '';
-         this.gallery =[];
-         let url = `${this.apiURL}?category=`+cat
+        this.gallery =[];
+        const url = `${this.apiURL}?category=`+cat;
         this.http.get(url, {headers:this.headers})
             .map((res: Response) => res.json())
             .subscribe(
@@ -158,8 +163,35 @@ export class GalleryComponent implements OnInit, OnDestroy, OnChanges {
                 err => console.error("Did you run the convert script from angular2-image-gallery for your images first? Original error: " + err),
                 () => undefined)
     }
-   
-  
+
+    private featured(featured) {
+         this.loader = true;
+        this.er = '';
+        this.gallery =[];
+        const url = `${this.apiURL}?featured=`+featured;
+        this.http.get(url, {headers:this.headers})
+            .map((res: Response) => res.json())
+            .subscribe(
+                data => {
+                    this.data = data;
+                    this.next = data.next;
+                    this.images = data.results;
+                    this.ImageService.updateImages(this.images)
+
+                    this.images.forEach((image) => {
+                        image['galleryImageLoaded'] = false
+                        image['viewerImageLoaded'] = false
+                        image['srcAfterFocus'] = ''
+                    });
+                    this.loader = false;
+                    this.er = 'No images to dispay';
+                    // twice, single leads to different strange browser behaviour
+                    this.render()
+                    this.render()
+                },
+                err => console.error("Did you run the convert script from angular2-image-gallery for your images first? Original error: " + err),
+                () => undefined)
+    }
 
     private render() {
         let tempRow = [this.images[0]]
@@ -202,6 +234,12 @@ export class GalleryComponent implements OnInit, OnDestroy, OnChanges {
         let galleryWidth = this.getGalleryWidth()
         let ratio = galleryWidth / 1920
         return Math.round(Math.max(1, this.providedImageMargin * ratio))
+    }
+
+     private MyImageMargin() {
+        let galleryWidth = this.getGalleryWidth()
+        let ratio = galleryWidth / 1920
+        return Math.round(Math.max(1, this.providedImageMargin * ratio)*0)
     }
 
     private calcOriginalRowWidth(imgRow: any[]) {
