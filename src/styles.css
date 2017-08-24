@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
 @import '~https://fonts.googleapis.com/icon?family=Material+Icons';
+@import '../node_modules/social-share-ng2/social-icon/css/social-icon.css';
 
 .loader {
   position:fixed;

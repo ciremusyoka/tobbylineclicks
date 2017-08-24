@@ -9,10 +9,10 @@ import {AboutService} from '../about/about.service';
 export class FooterComponent implements OnInit {
   navbar: Boolean = false;
 
-  constructor(private about: AboutService) { 
+  constructor(private about: AboutService) {
     this.about.imageview.subscribe(resp => {
       this.navbar = resp;
-  })
+  });
   }
 
   ngOnInit() {

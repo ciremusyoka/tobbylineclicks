@@ -9,9 +9,10 @@
 				
 				<div class="col-md-12" >
 					<div class="row">
+						<div *ngIf="loader" class="loader"></div>
 						<div *ngIf="blog==''" class="text-center" style="color: red; top: 50%; left: 50%; position: fixed">{{er}}</div>
 						<div class="col-md-4" *ngFor="let bl of blog " bl="selectedblog">
-							<div *ngIf="loader" class="loader"></div>
+							
 							<div class="card card-blog" >
 								<div class="card-image">
 									<a [routerLink]="['/blog',bl.id]" >
@@ -25,7 +26,7 @@
 										<a [routerLink]="['/blog',bl.id]">{{bl.title}}</a>
 									</h4>
 									<p class="card-description" >
-                                       <span [innerHTML]="bl.description"></span>
+                                       <span [innerHTML]="bl.mypreview"></span>
 										    <a  [routerLink]="['/blog',bl.id]" >... Read More </a>
 									</p>
 								</div>

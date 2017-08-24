@@ -18,11 +18,12 @@ import { BlogdetailsComponent } from './pages/blog/blogdetails';
 import { BlogcategoryComponent } from './pages/blog/blogcategory';
 import { BlogService } from './pages/blog/blogservice';
 import { MaterialModule } from '@angular/material';
-import {Angular2ImageGalleryModule} from 'angular2-image-gallery';
 import { PipePipe } from './pages/blog/pipe.pipe';
-import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { FooterComponent } from './pages/footer/footer.component';
 import { HeaderComponent } from './pages/header/header.component';
+import { FacebookModule } from 'ngx-facebook';
+import { FacebookService } from 'ng2-facebook-sdk';
+import { MetaModule } from 'ng2-meta';
 
 
 @NgModule({
@@ -42,14 +43,16 @@ import { HeaderComponent } from './pages/header/header.component';
     HeaderComponent,
   ],
   imports: [
+    FacebookModule.forRoot(),
     BrowserModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
     MaterialModule,
+    MetaModule.forRoot(),
     
   ],
-  providers: [AboutService, ImageService, BlogService],
+  providers: [AboutService, ImageService, BlogService, FacebookService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

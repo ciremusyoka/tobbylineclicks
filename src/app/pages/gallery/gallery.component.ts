@@ -29,8 +29,8 @@ export class GalleryComponent implements OnInit, OnDestroy, OnChanges {
     private viewerSubscription: Subscription;
     private innerHeight: any;
     public headers = new Headers({'Content-Type': 'application/json'});
-    //private apiURL = 'https://api.tobbyline.com/api/images';
-    public apiURL = 'http://localhost:8000/api/images';
+    private apiURL = 'https://api.tobbyline.com/api/images';
+    // public apiURL = 'http://localhost:8000/api/images';
 
     @Input('flexBorderSize') providedImageMargin: number = 2
     @Input('flexImageSize') providedImageSize: number = 7

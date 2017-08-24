@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef, Renderer } from '@angular/core';
 import {AboutService} from '../about/about.service';
 import { BlogComponent } from './blog';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { Location, } from '@angular/common';
 import { BlogService } from './blogservice';
 import 'rxjs/add/operator/switchMap';
+import { FacebookService, UIParams, UIResponse, InitParams  } from 'ngx-facebook';
 
 
 @Component({
@@ -12,6 +13,7 @@ import 'rxjs/add/operator/switchMap';
     templateUrl: './blogdetails.html'
 })
 export class BlogdetailsComponent implements OnInit {
+    @ViewChild('detail') detail: ElementRef;
     im = '';
     loader: boolean = true;
     weddings = '';
@@ -27,11 +29,19 @@ export class BlogdetailsComponent implements OnInit {
                 private location: Location,
                 private blogserv: BlogService,
                 private router: Router,
+                private renderer:Renderer,
+                private face: FacebookService
                 ) {
+
+        face.init({
+            version: 'v2.9',
+            appId: '1927971220769787'
+         });
+
         this.aboutserv.imageview.subscribe(resp=>{this.hideheader=resp
          } );
 
-        this.innerHeight = (window.screen.height)*3/4 ; 
+        this.innerHeight = (window.screen.height)*3/4 ;
     }
 
     onViewChange() {
@@ -60,14 +70,35 @@ export class BlogdetailsComponent implements OnInit {
         this.location.back();
     }
 
+    share() {
+    const options: UIParams = {
+      method: 'share',
+      href: 'https://github.com/zyramedia/ng2-facebook-sdk'
+    };
+
+    this.face.ui(options)
+      .then((res: UIResponse) => {
+        console.log('Got the users profile', res);
+      })
+      .catch(this.handleError);
+
+  }
+
+  private handleError(error) {
+    console.error('Error processing action', error);
+  }
+
     public ngOnInit(): void {
         this.route.params
             .switchMap((params: Params) => this.blogserv.getbl(+params['id']))
             .subscribe(bl => {
+                var list = document.getElementById("mydetail"); 
+                list.innerHTML='';
                 this.imagethree = bl.image_3;
                 this.bl = bl;
                 this.loader =false;
                 this.blog = bl.similar;
+        this.renderer.invokeElementMethod(this.detail.nativeElement, 'insertAdjacentHTML' ,['beforeend', bl.description]);
             }); 
         
         this.router.events.subscribe((evt) => {
